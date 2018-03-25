@@ -1,0 +1,334 @@
+<html>
+<head>
+	<title>Something new</title>
+</head>
+<body background="images.jpg">
+	<img src="menu_background_by_stickerb-d9inv26.png" alt="sd" width=1000 height=607>
+	<canvas id="myCanvas" width=1000 height=607>
+	</canvas>
+	<audio id="xyz">
+  <source src="shot-[AudioTrimmer.com](1).ogg" type="audio/ogg">
+  <source src="shot-[AudioTrimmer.com](1).mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<audio id="abc">
+  <source src="Secret-Catacombs.ogg" type="audio/ogg">
+  <source src="Secret-Catacombs.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+        <p id="mis"></p>
+	<p id="time"></p>
+        <p id="demo"></p>
+	<p id="score">Score:&nbsp;&nbsp;&nbsp;</p>
+	<style>
+	img{
+		position:fixed;
+		top:10px;
+		
+	}
+        #mis{
+                font-size:25px;
+		color:white;
+		background-color: black;
+		position:fixed;
+		top:100px;
+		left:900px;
+	}
+        #demo{
+                font-size:50px; 
+		color:red;
+		background-color:white;
+		padding:0px;
+		position:fixed;
+		top:100px;
+		left:250px;
+	}
+	#score{
+		color:white;
+		background-color: black;
+		padding:10px;
+		position:fixed;
+		top:10px;
+		left:900px;
+	}
+	#time{
+		color:white;
+		background-color: black;
+		padding:10px;
+		position:fixed;
+		top:10px;
+		left:780;
+	}
+ .restart{position: absolute; top:28px; left:1050px;   background-color: #000000; font-size:25px; 
+			font-family: "Times New Roman"; color:#FFFFFF;}
+    .quit{position: absolute; top:28px; left:1200px;   background-color: #000000; font-size:25px; 
+			font-family: "Times New Roman"; color:#FFFFFF;}
+
+</style>
+<form    action="file:///home/ekta/Documents/hackathon/pause.html">
+    <input type="submit" class="restart"  value="Restart" />
+	</form>
+<form    action="file:///home/ekta/Documents/hackathon/logout.html">
+    <input type="submit" class="quit"  value="Quit" />
+	</form>
+
+</body>
+<script >
+       var timeToCreate =700;
+	  var timeto =50;
+           var timeto2 =500;
+	var canvas;
+	var smoke=new Image();
+	smoke.src="4b4b9918422e0a619ab780da35124d66.png"
+		var ctx;
+		var posX;
+		var posY;
+		var tar={
+			x:50,y:50
+		}
+		var mousePos;
+		var w=91;
+		var h=91;
+		var ch=new Image();
+		ch.src="crosshair.png";
+		var ch2=new Image();
+		ch2.src="batSpritesheet.png";
+                 var ch3=new Image();
+		ch3.src="batDeath.png";
+		var canWidth;
+		var canHeight;
+		var t=60;
+		var xSpeed=2;
+		var ySpeed=3;
+		var x=0;
+		var y=0;
+                var x3=0;
+		var y3=0;
+		var score;
+		var s=0;
+		var srcX=0;
+		var srcY=0;
+                var srcX3=0;
+		var srcY3=0;
+		var sheetWidth=990;
+		var sheetHeight=117;
+                var sheetWidth3=1386;
+		var sheetHeight3=148;
+		var cols=5;
+		var rows=1;
+                var cols3=7;
+		var width=sheetWidth/cols;
+		var height=sheetHeight/rows;
+                var width3=sheetWidth3/cols3;
+		var height3=sheetHeight3/rows;
+		var current=0;
+                var current3=0;
+		var gametimer;
+              var ttime=0;
+  var dtimer;
+var ttimer;
+		window.onload=function init()
+{
+	canvas=document.getElementById("myCanvas");
+	ctx=canvas.getContext("2d");
+	canvas.style.border="1px solid black";
+	canvas.style.left = "7px";
+    canvas.style.position = "absolute";
+	canvas.addEventListener("mousemove",mouseMoved);
+	canvas.addEventListener("mousedown",clicked);
+	document.getElementById("score").innerHTML="Score:"+s;
+	document.getElementById("time").innerHTML=t;
+	gametimer=setInterval(timer,1000);
+       dtimer=setInterval(draw,20);
+	canWidth=canvas.width;
+	canHeight=canvas.height;
+	var b=document.getElementById("abc");
+	b.play();
+		
+	mainloop();
+
+};
+function mainloop()
+{
+	movePlayerWithMouse();
+      
+	// draw(); 
+	requestAnimationFrame(mainloop);
+}
+function mouseMoved(evt) {
+    mousePos = getMousePos(canvas, evt);
+}
+
+function getMousePos(canvas, evt)
+ {
+    
+
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
+}
+
+function timer()
+{
+         
+	t--;
+	document.getElementById("time").innerHTML=t;
+       
+       if(t==0)
+{
+         if(s>=10)
+	{
+          xSpeed=0;
+	  ySpeed=0;
+           x=1400;
+           y=1400;
+          document.getElementById("time").innerHTML="0";
+          clearInterval(gametimer);
+          level();
+          
+        }
+       else
+       {
+          xSpeed=0;
+	  ySpeed=0;
+           x=1400;
+           y=1400;
+          document.getElementById("time").innerHTML="0";
+          clearInterval(gametimer);
+document.getElementById("demo").innerHTML = "GAME OVER";
+}
+}
+
+}
+function level() {
+    var str = "Click to enter LEVEL 2";
+    var result = str.link("https://www.w3schools.com");
+    document.getElementById("demo").innerHTML = result;
+}
+function clicked()
+{
+	var a=document.getElementById("xyz");
+	
+	if(((x+width)>=mousePos.x)&&(x<=mousePos.x)&&((y+height)>=mousePos.y)&&(y<=mousePos.y))
+	{
+                   x3=x;
+                   y3=y;
+                  xSpeed=0;
+	         ySpeed=0;
+                  x=1400;
+                  y=1400;
+                current3=-1;
+                 ttime=0;
+                  ttimer=setInterval(draw3,40);
+	         
+                    setTimeout(beingstupid, timeto2);
+                      a.play();
+		
+		
+		scoring();
+		
+		
+	}
+	else
+	{
+                document.getElementById("mis").innerHTML ="miss";
+		a.play();
+		reduce();
+                 setTimeout(misd,timeToCreate);
+	}
+}
+function beingstupid()
+{
+        xSpeed=Math.floor(Math.random()*5)+1;
+		ySpeed=Math.floor(Math.random()*5)+1;
+		x=Math.floor(Math.random()*400);
+		y=Math.floor(Math.random()*400);    
+}
+function misd()
+{
+ document.getElementById("mis").innerHTML =" ";
+}
+function scoring()
+{
+	s+=10;
+	document.getElementById("score").innerHTML="Score:"+s;
+}
+function reduce()
+{
+	if(s>0)
+	{
+	s-=5;
+	document.getElementById("score").innerHTML="Score:"+s;
+	}
+
+}
+
+function update()
+		{
+			current=++current%cols;
+			srcX=current*width;
+			srcY=0;
+			ctx.clearRect(0,0,canWidth,canHeight);
+                          
+		}
+function update3()
+		{ 
+			current3=++current3%cols3;
+			srcX3=current3*width3;
+			srcY3=0; 
+		}
+function draw()
+		{
+			update();
+			ctx.drawImage(ch2,srcX,srcY,width,height,x,y,width,height);
+			x+=xSpeed;
+			y+=ySpeed;
+			test();
+			obb(tar);
+			
+		}
+function draw3()
+		{
+                       ttime+=40;
+                       if(ttime>=280)
+                      {clearInterval(ttimer);}
+			update3();
+			ctx.drawImage(ch3,srcX3,srcY3,width3,height3,x3,y3,width3,height3);
+			obb(tar);
+			
+		}
+function test()
+		{
+			if((x+width)>canWidth)
+			{
+				xSpeed=-xSpeed;
+			}
+			else if(x<0)
+			{
+				xSpeed=-xSpeed;
+			}
+			if((y+height)>canHeight)
+			{
+				ySpeed=-ySpeed;
+			}
+			else if(y<0)
+			{
+				ySpeed=-ySpeed;
+			}
+		}
+		function movePlayerWithMouse() {
+  if(mousePos !== undefined) {
+    tar.x = mousePos.x;
+    tar.y = mousePos.y;
+  }
+}
+
+function obb(pos)
+		{
+			ctx.drawImage(ch,pos.x-45,pos.y-45,w,h);
+
+		}
+	</script>
+	</html>
